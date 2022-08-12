@@ -145,6 +145,8 @@ function makeMarqueModelCv(chaine) {
   tokens = romainToDecimal(tokens);
   marqueModelCv.model = tokens.join(" ");
 
+  if(process.argv[2])
+    console.log(JSON.stringify(marqueModelCv))
   return JSON.stringify(marqueModelCv);
 }
 
@@ -175,5 +177,8 @@ function makeMarqueModelCv(chaine) {
 // }
 
 // return makeMarqueModel(process.argv[2]);
+
+if(process.argv[2]) 
+makeMarqueModelCv(process.argv[2]);
 
 module.exports = makeMarqueModelCv;

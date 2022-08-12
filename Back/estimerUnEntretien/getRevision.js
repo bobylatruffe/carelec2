@@ -28,11 +28,16 @@ function getRevision(numPlaque) {
       let standardise = makeMarqueModelCv(libelle);
       let revisions = searchModelInFileFs(standardise);
 
-      return {
-        "status": 1,
-        "date1erImmat": res.firstRegistrationDate,
-        "revisions": revisions
-      }
+      if (revisions)
+        return {
+          "status": 1,
+          "date1erImmat": res.firstRegistrationDate,
+          "revisions": revisions
+        }
+
+        return {
+          "status": 0,
+        }
     })
     .catch(err => {
       return {
