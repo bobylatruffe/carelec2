@@ -1,6 +1,11 @@
+import EstimerUnEntretien from "./Pages/EstimerUnEntretien/EstimerUnEntretien";
+
 function App() {
   return (
-    <h1>Carelec</h1>
+    <div>
+      <h1>Carelec</h1>
+      <EstimerUnEntretien />
+    </div>
   );
 }
 
