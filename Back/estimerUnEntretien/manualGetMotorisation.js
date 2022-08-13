@@ -14,6 +14,7 @@ en choisissant étape par étape : MARQUE -> MODELE -> MOTORISATION
 const fs = require('fs');
 let baseDir = "./Carnets d'entretiens/";
 let currentSearchDir = "";
+let lastMarque = "";
 let cl = console.log;
 
 function getMarques() {
@@ -23,15 +24,20 @@ function getMarques() {
 }
 
 function getModels(marque) {
+  // marque = marque.split(" ");
+  // marque.map(elem => elem.charAt(0).toUpperCase() + elem.slice(1));
+  // marque = marque.join(" ");
+
   currentSearchDir = baseDir + marque.toLowerCase();
+  lastMarque = marque.toLowerCase();
   let modelsDispo;
   // let modelsDispo = fs.readdirSync(dir).map(elem => elem.toLowerCase());
 
   try {
     modelsDispo = fs.readdirSync(currentSearchDir);
   } catch (err) {
-    return undefined;
-  }
+    return []
+  };
 
   modelsDispo = modelsDispo.map(elem => elem.split(".")[0]);
 
@@ -39,7 +45,7 @@ function getModels(marque) {
 }
 
 function getMotorisations(model) {
-  currentSearchDir += "/" + model;
+  currentSearchDir = baseDir + lastMarque + '/' + model
 
   let motorisationsDispo = fs.readFileSync(currentSearchDir + ".json");
   motorisationsDispo = JSON.parse(motorisationsDispo);
@@ -80,4 +86,4 @@ function manualGetMotorisation(marqueRechercher) {
 
 // manualGetMotorisation(process.argv[2]);
 
-module.exports = {getMarques, getModels, getMotorisations, getEntretien}
+module.exports = { getMarques, getModels, getMotorisations, getEntretien }
