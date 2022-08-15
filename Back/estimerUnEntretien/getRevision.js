@@ -11,7 +11,7 @@ Ce module-wraper, permet de lister toutes les préconisations constructeur d'un 
  * Usage .................... : node getRevision.js AANNNAA 
  **/
 
-const searchModelInFileFs = require('./searchModelInFileFs.js');
+const getMotorisationRevisionsKm = require('./searchModelInFileFs.js');
 const makeMarqueModelCv = require('./makeMarqueModelCv');
 
 const fs = require('fs');
@@ -26,36 +26,24 @@ function getRevision(numPlaque) {
     .then(res => {
       let libelle = res.vehicule[0].libelle;
       let standardise = makeMarqueModelCv(libelle);
-      let revisions = searchModelInFileFs(standardise);
+      let standardiseJson = JSON.parse(standardise);
+      let motorisationRevisionsKm = getMotorisationRevisionsKm(standardise);
 
-      if (revisions)
-        return {
-          "status": 1,
-          "date1erImmat": res.firstRegistrationDate,
-          "revisions": revisions
-        }
+      if (motorisationRevisionsKm)
+        return ({
+          status: 1,
+          dateMiseCirculation: res.firstRegistrationDate,
+          marque: standardiseJson.marque,
+          motorisation: motorisationRevisionsKm.motorisation,
+          revisionsKm: motorisationRevisionsKm.revisionsKm,
+        })
 
-        return {
-          "status": 0,
-        }
-    })
-    .catch(err => {
+    }).catch(() => {
       return {
-        "status": 2,
-        "marques": getMarques(),
+        status: 404,
       }
     })
 }
 
 
 module.exports = getRevision
-
-  // let libelle = res.vehicule[0].libelle
-  // console.log(libelle);
-
-  // let standardise = makeMarqueModelCv(libelle);
-  // console.log(standardise);
-
-  // let revisions = searchModelInFileFs(standardise);
-  // return revisions;
-  // })
