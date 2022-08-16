@@ -49,7 +49,7 @@ class Connexion extends React.Component {
     signUp(this.state.email, this.state.confirmPasswd)
     .then(userAuth => {
 
-      createUser(userAuth.user, this.state);
+      createUser(userAuth.user, this.state.nom, this.state.prenom, this.state.email);
 
       this.setState({
         userAuth: userAuth,

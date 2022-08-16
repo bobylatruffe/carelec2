@@ -42,7 +42,7 @@ const signOut = () => {
 const db = getFirestore();
 
 // créer un user dans firestore
-const createUser = (userAuth, infosUser) => {
+const createUser = (userAuth, nom, prenom, email) => {
   if (!userAuth)
     return
 
@@ -52,7 +52,9 @@ const createUser = (userAuth, infosUser) => {
     .then(userSnapShot => {
       if (!userSnapShot.exists()) {
         setDoc(refDoc, {
-          ...infosUser,
+          nom,
+          prenom,
+          email,
         })
       }
     }).catch(err => console.log(err.code));
