@@ -1,12 +1,11 @@
-import EstimerUnEntretien from "./Pages/EstimerUnEntretien/EstimerUnEntretien";
-import Connexion from '../src/Pages/Connexion/Connexion';
+import EstimerUnEntretien from "./Composants/EstimerUnEntretien/EstimerUnEntretien";
 
 function App() {
   return (
     <div>
       <h1>Carelec</h1>
       <EstimerUnEntretien />
-      <Connexion />
+      {/* <Connexion /> */}
     </div>
   );
 }
