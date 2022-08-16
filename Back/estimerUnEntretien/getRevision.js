@@ -15,7 +15,6 @@ const getMotorisationRevisionsKm = require('./searchModelInFileFs.js');
 const makeMarqueModelCv = require('./makeMarqueModelCv');
 
 const fs = require('fs');
-const { getMarques } = require('./manualGetMotorisation');
 
 const apiRaw = fs.readFileSync("./estimerUnEntretien/api-plaque.txt");
 const apiPlaque = apiRaw.toString();
