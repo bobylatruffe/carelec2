@@ -1,10 +1,20 @@
 const express = require('express');
+const polyUtil = require('polyline-encoded');
 const app = express();
 
 const getRevision = require('./estimerUnEntretien/getRevision');
 const { getModels, getMarques, getMotorisations } = require('./estimerUnEntretien/manualGetMotorisation');
 
 const cl = console.log;
+
+let simulationGps = [];
+function getGaragistePos() {
+  if (simulationGps.length === 0)
+    simulationGps = polyUtil.decode("ayhgHcbkn@R}GsB_CGwEvFEjCt\\cCbz@{Pd~@jc@b_@{Rpv@mBdBeA}AbBaCvHlHjd@pl@zHtOvF|XfEdy@pS|h@rBvOdCnAj[yHxt@gZ~WbKpj@tEvw@`i@pExJpQ~x@hSrOh@yF");
+    
+
+  return simulationGps.shift();
+}
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -30,8 +40,12 @@ app.get("/api/getMarques", (req, resp) => {
   resp.send(getMarques());
 });
 
+app.get("/api/getGaragistePos/", (req, resp) => {
+  resp.send(getGaragistePos());
+});
+
 app.get("/*", (req, resp) => {
-  resp.send({status: 404})
+  resp.send({ status: 404 })
 });
 
 app.listen(5000, () => {

@@ -9,7 +9,8 @@
   "author": "Bozlak Fatih",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "polyline-encoded": "^0.0.9"
   },
   "devDependencies": {
     "nodaemon": "^0.0.5"

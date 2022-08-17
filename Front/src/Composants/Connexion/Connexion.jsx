@@ -1,5 +1,6 @@
 import React from "react";
 import { createUser, signIn, signUp, addRdvUser } from "../../utilitaires/firebaseUtil";
+import { auth } from "../../utilitaires/firebaseUtil";
 
 import './Connexion.css'
 

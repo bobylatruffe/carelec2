@@ -70,4 +70,11 @@ const addRdvUser = (userUid, infosVehicule) => {
     })
 }
 
-export { signUp, signIn, createUser, auth, addRdvUser }
+const getAdresseUser = (userUid) => {
+  const refDoc = doc(db, "users", userUid);
+
+  return getDoc(refDoc)
+    .then(docUser => docUser.data().adresse)
+}
+
+export { signUp, signIn, createUser, auth, addRdvUser, getAdresseUser}
